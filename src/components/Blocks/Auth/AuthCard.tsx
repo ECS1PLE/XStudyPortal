@@ -113,7 +113,7 @@ export function AuthCard({ mode }: { mode: Mode }) {
               </div>
               <label className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
                 <input type="checkbox" checked={registerForm.isPerformer} onChange={(e) => setRegisterForm((prev) => ({ ...prev, isPerformer: e.target.checked }))} />
-                Зарегистрироваться как ментор / консультант
+                Зарегистрироваться как исполнитель
               </label>
             </div>
 
