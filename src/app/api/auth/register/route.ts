@@ -1,5 +1,4 @@
 import bcrypt from 'bcryptjs';
-import { Role } from '@prisma/client';
 import { NextResponse } from 'next/server';
 import { createSession } from '@/lib/auth';
 import { registerSchema } from '@/lib/validators';
@@ -26,14 +25,15 @@ export async function POST(request: Request) {
         name: data.name,
         university: data.university,
         course: data.course,
-        role: data.isPerformer ? Role.PERFORMER : Role.USER,
+        role: data.isPerformer ? 'PERFORMER' : 'USER',
         performerProfile: data.isPerformer
           ? {
               create: {
                 bio: data.bio ?? 'Новый исполнитель.',
                 subjects: data.subjects,
                 telegram: data.telegram || null,
-                startingPrices: data.startingPrices
+                startingPrices: data.startingPrices,
+                isVerified: false
               }
             }
           : undefined
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ok: true, user: { id: user.id, email: user.email, role: user.role } });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: 'Не удалось зарегистрироваться.' }, { status: 400 });
+    console.error('REGISTER_ERROR:', error);
+    return NextResponse.json({ error: error instanceof Error ? error.message : 'Не удалось зарегистрироваться.' }, { status: 500 });
   }
 }

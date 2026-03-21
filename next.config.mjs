@@ -16,7 +16,6 @@ const nextConfig = {
   output: 'standalone',
   poweredByHeader: false,
   reactStrictMode: true,
-  reactCompiler: true,
   compress: true,
   turbopack: {
     root: __dirname

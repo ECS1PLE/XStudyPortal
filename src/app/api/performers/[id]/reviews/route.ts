@@ -15,7 +15,7 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
   });
 
   return NextResponse.json(
-    reviews.map((review) => ({
+    reviews.map((review: (typeof reviews)[number]) => ({
       id: review.id,
       rating: review.rating,
       comment: review.comment,

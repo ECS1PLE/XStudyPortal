@@ -13,7 +13,7 @@ export async function GET() {
       username: url.username,
       startsWithQuote: env.DATABASE_URL.startsWith('"') || env.DATABASE_URL.startsWith("'"),
       endsWithQuote: env.DATABASE_URL.endsWith('"') || env.DATABASE_URL.endsWith("'"),
-      hasDirectDatabaseUrl: Boolean(env.DIRECT_DATABASE_URL),
+      hasDirectDatabaseUrl: Boolean(env.DATABASE_URL),
     });
   } catch (error) {
     return NextResponse.json(
