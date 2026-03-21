@@ -66,3 +66,5 @@ body {
 .card-title {
   @apply text-xl font-semibold tracking-tight text-slate-900;
 }
+
+/**\
