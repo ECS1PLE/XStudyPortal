@@ -13,7 +13,6 @@ export async function Header() {
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 font-black text-white">SP</div>
             <div>
               <div className="text-sm font-black uppercase tracking-[0.28em] text-blue-700">Student Portal</div>
-              <div className="text-xs text-slate-500">support / mentor / ratings / materials / ai</div>
             </div>
           </Link>
         </div>

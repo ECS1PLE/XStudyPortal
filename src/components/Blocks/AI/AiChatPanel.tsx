@@ -61,7 +61,7 @@ export function AiChatPanel() {
         <div className="flex-1 space-y-4 overflow-y-auto pr-1">
           {messages.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-slate-200 p-6 text-sm text-slate-500">
-              Начните диалог — история сообщений хранится в Redux Toolkit.
+              Начните диалог(Временно не работает).
             </div>
           ) : (
             messages.map((message, index) => (
