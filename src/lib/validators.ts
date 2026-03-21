@@ -5,36 +5,36 @@ const helpTypeKeys = Object.keys(helpTypeLabels) as Array<keyof typeof helpTypeL
 const materialTypeKeys = Object.keys(materialTypeLabels) as Array<keyof typeof materialTypeLabels>;
 
 const priceMap = z.object({
-  LAB_GUIDANCE: z.number().min(0),
-  PRACTICE_COACHING: z.number().min(0),
-  REPORT_REVIEW: z.number().min(0),
-  COURSE_PROJECT_MENTORING: z.number().min(0),
-  THESIS_CONSULTING: z.number().min(0)
+  LAB_GUIDANCE: z.coerce.number().min(0),
+  PRACTICE_COACHING: z.coerce.number().min(0),
+  REPORT_REVIEW: z.coerce.number().min(0),
+  COURSE_PROJECT_MENTORING: z.coerce.number().min(0),
+  THESIS_CONSULTING: z.coerce.number().min(0)
 });
 
 export const loginSchema = z.object({
-  email: z.string().email(),
+  email: z.string().trim().toLowerCase().email(),
   password: z.string().min(6)
 });
 
 export const registerSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
+  name: z.string().trim().min(2),
+  email: z.string().trim().toLowerCase().email(),
   password: z.string().min(6),
-  university: z.string().min(2),
-  course: z.number().int().min(1).max(6),
+  university: z.string().trim().min(2),
+  course: z.coerce.number().int().min(1).max(6),
   isPerformer: z.boolean().default(false),
-  bio: z.string().optional(),
-  subjects: z.array(z.string()).default([]),
-  telegram: z.string().optional(),
+  bio: z.string().optional().transform((value) => value?.trim() || undefined),
+  subjects: z.array(z.string().trim()).default([]),
+  telegram: z.string().optional().transform((value) => value?.trim() || undefined),
   startingPrices: priceMap.default(defaultStartingPrices)
 });
 
 export const materialSchema = z.object({
-  title: z.string().min(5),
-  description: z.string().min(10),
-  subject: z.string().min(2),
-  university: z.string().min(2),
+  title: z.string().trim().min(5),
+  description: z.string().trim().min(10),
+  subject: z.string().trim().min(2),
+  university: z.string().trim().min(2),
   type: z.enum(materialTypeKeys),
   downloadUrl: z.string().url()
 });
@@ -63,7 +63,7 @@ export const performerVerifySchema = z.object({
 });
 
 export const performerReviewSchema = z.object({
-  rating: z.number().int().min(1).max(5),
+  rating: z.coerce.number().int().min(1).max(5),
   comment: z.string().max(1000).optional().transform((value) => value?.trim() || undefined)
 });
 
